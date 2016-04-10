@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="lyqPro:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="lyqPro.war">
+      <element id="artifact" artifact-name="lyqPro:war exploded" />
+    </root>
+  </artifact>
+</component>
