@@ -53,6 +53,7 @@
 		});
 	};
 	$(function() {
+		initSearch();// 初始查询
 		grid = $('#grid').datagrid({
 			title : '',
 			url : sy.contextPath + '/account/daily/daily!grid.sy',
@@ -68,7 +69,10 @@
 			frozenColumns : [ [ {
 				width : '80',
 				title : '账户名',
-				field : 'name',
+				field : 'account',
+				formatter : function(value, row) {
+					return value.name;
+				},
 				sortable : true
 			}, {
 				width : '80',
@@ -126,9 +130,18 @@
 			onLoadSuccess : function(data) {
 				$('.iconImg').attr('src', sy.pixel_0);
 				parent.$.messager.progress('close');
-			}
+			},
+			queryParams: sy.serializeObject($('#searchForm'))
 		});
 	});
+	
+	// 初始查询条件
+	function initSearch() {
+		$('#searchForm input').val('');
+		// 设置查询时间段为当月
+		$('#beginTime').val(lyq.Time.getFirstDayForNow());
+		$('#endTime').val(lyq.Time.getLastDayForNow());
+	}
 </script>
 </head>
 <body class="easyui-layout" data-options="fit:true,border:false">
@@ -139,11 +152,13 @@
 					<form id="searchForm">
 						<table>
 							<tr>
-								<td>账户名</td>
-								<td><input name="QUERY_t#name_S_LK" style="width: 80px;" /></td>
-								<td>创建时间</td>
-								<td><input name="QUERY_t#createdatetime_D_GE" class="Wdate" onclick="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly="readonly" style="width: 120px;" />-<input name="QUERY_t#createdatetime_D_LE" class="Wdate" onclick="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly="readonly" style="width: 120px;" /></td>
-								<td><a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'ext-icon-zoom',plain:true" onclick="grid.datagrid('load',sy.serializeObject($('#searchForm')));">过滤</a><a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'ext-icon-zoom_out',plain:true" onclick="$('#searchForm input').val('');grid.datagrid('load',{});">重置过滤</a></td>
+								<td>创建时间:</td>
+								<td><input id="beginTime" name="QUERY_t#createdatetime_D_GE" class="Wdate" onclick="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly="readonly" style="width: 120px;" />-<input id="endTime" name="QUERY_t#createdatetime_D_LE" class="Wdate" onclick="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly="readonly" style="width: 120px;" /></td>
+								<td>备注:</td>
+								<td><input name="QUERY_t#remark_S_LK" style="width: 80px;" /></td>
+								<td>账户名:</td>
+								<td><input id="QUERY_accountname" name="QUERY_account#name_S_LK" class="easyui-combobox" data-options="valueField:'name',textField:'name',url:'<%=contextPath%>/account/account!doNotNeedSessionAndSecurity_nameComboBox.sy',mode:'remote',delay : 500,hasDownArrow:false" style="width: 80px;" /></td>
+								<td><a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'ext-icon-zoom',plain:true" onclick="grid.datagrid('load',sy.serializeObject($('#searchForm')));">过滤</a><a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'ext-icon-zoom_out',plain:true" onclick="initSearch();grid.datagrid('load',sy.serializeObject($('#searchForm')));">重置过滤</a></td>
 							</tr>
 						</table>
 					</form>
@@ -156,9 +171,6 @@
 							<%if (securityUtil.havePermission("/account/daily/daily!save")) {%>
 							<td><a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'ext-icon-note_add',plain:true" onclick="addFun();">添加</a></td>
 							<%}%>
-							<td><div class="datagrid-btn-separator"></div></td>
-							<td><a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'ext-icon-table_add',plain:true" onclick="">导入</a></td>
-							<td><a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'ext-icon-table_go',plain:true" onclick="">导出</a></td>
 						</tr>
 					</table>
 				</td>

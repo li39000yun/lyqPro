@@ -57,6 +57,10 @@
 				}
 				parent.$.messager.progress('close');
 			}, 'json');
+			// 金额不可改
+			$('#money').css({background: "#A1A1A1" }).attr("readonly","readonly");
+			// 账户名不可改
+			$('#name').css({background: "#A1A1A1" }).attr("readonly","readonly");
 		}
 	});
 </script>
@@ -72,12 +76,12 @@
 				</tr>
 				<tr>
 					<th>账户名</th>
-					<td><input name="data.name" class="easyui-validatebox" data-options="required:true"/></td>
+					<td><input id="name" name="data.name" class="easyui-validatebox" data-options="required:true"/></td>
 				</tr>
 				<tr>
 					<th>类型</th>
 					<td>
-						<select class="easyui-combobox" name="data.type" data-options="panelHeight:'auto',editable:false" style="width: 155px;">
+						<select id="type" class="easyui-combobox" name="data.type" data-options="panelHeight:'auto',editable:false" style="width: 155px;">
 							<option value="0">现金</option>
 							<option value="1">银行卡</option>
 							<option value="2">虚拟账户</option>
@@ -87,7 +91,7 @@
 				</tr>
 				<tr>
 					<th>余额</th>
-					<td><input name="data.money" class="easyui-validatebox" data-options="validType:'number'"/></td>
+					<td><input id="money" name="data.money" class="easyui-validatebox" data-options="required:true,validType:'number'"/></td>
 				</tr>
 				<tr>
 					<th>备注</th>

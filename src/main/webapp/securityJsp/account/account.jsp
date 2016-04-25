@@ -160,9 +160,6 @@
 							<%if (securityUtil.havePermission("/account/account!save")) {%>
 							<td><a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'ext-icon-note_add',plain:true" onclick="addFun();">添加</a></td>
 							<%}%>
-							<td><div class="datagrid-btn-separator"></div></td>
-							<td><a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'ext-icon-table_add',plain:true" onclick="">导入</a></td>
-							<td><a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'ext-icon-table_go',plain:true" onclick="">导出</a></td>
 						</tr>
 					</table>
 				</td>

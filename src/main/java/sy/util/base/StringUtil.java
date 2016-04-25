@@ -24,4 +24,5 @@ public class StringUtil {
 		return str;
 	}
 
+	public static String FS_EMPTY = "";
 }

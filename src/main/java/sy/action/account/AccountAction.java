@@ -66,8 +66,8 @@ public class AccountAction extends BaseAction<Account> {
 			HqlFilter hqlFilter = new HqlFilter();
 			hqlFilter.addFilter("QUERY_t#id_S_NE", data.getId());
 			hqlFilter.addFilter("QUERY_t#name_S_EQ", data.getName());
-			Account Account = service.getByFilter(hqlFilter);
-			if (Account != null) {
+			Account account = service.getByFilter(hqlFilter);
+			if (account != null) {
 				json.setMsg("更新账户失败，账户名已存在！");
 			} else {
 				Account t = service.getById(data.getId());
@@ -80,4 +80,39 @@ public class AccountAction extends BaseAction<Account> {
 		writeJson(json);
 	}
 
+	/**
+	 * 获得账户下拉树
+	 */
+	public void doNotNeedSecurity_comboTree() {
+		HqlFilter hqlFilter = new HqlFilter();
+		writeJson(service.findByFilter(hqlFilter));
+	}
+
+	/**
+	 * 账户信息的自动补全
+	 */
+	public void doNotNeedSessionAndSecurity_nameComboBox() {
+		HqlFilter hqlFilter = new HqlFilter();
+		hqlFilter.addFilter("QUERY_t#name_S_LK", "%%" + StringUtils.defaultString(q) + "%%");
+		hqlFilter.addSort("t.name");
+		hqlFilter.addOrder("asc");
+		writeJsonByIncludesProperties(service.findByFilter(hqlFilter, 1, 10), new String[] { "name" });
+	}
+
+	/**
+	 * 账户收支统计表
+	 */
+	public void doNotNeedSecurity_accountTotal() {
+		HqlFilter hqlFilter = new HqlFilter(getRequest());
+		writeJson(((AccountServiceI) service).accountTotal(hqlFilter));
+	}
+
+	/**
+	 * 导出账户收支统计表
+	 */
+	public void doNotNeedSecurity_excel_accountTotal() {
+		HqlFilter hqlFilter = new HqlFilter(getRequest());
+		((AccountServiceI) service).exportExcelAccountTotal(hqlFilter, "accountTotal.xls");
+		// download("accountTotal.xls");
+	}
 }
