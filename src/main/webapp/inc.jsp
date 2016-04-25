@@ -7,7 +7,7 @@
 
 <%String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();%>
 <%String contextPath = request.getContextPath();%>
-<%String version = "20150521";%>
+<%String version = "20160214";%>
 
 <%
 Map<String, Cookie> cookieMap = new HashMap<String, Cookie>();
@@ -81,3 +81,5 @@ if (StringUtils.indexOfIgnoreCase(User_Agent, "MSIE") > -1 && (StringUtils.index
 
 <%-- 引入javascript扩展 --%>
 <script src="<%=contextPath%>/jslib/syExtJavascript.js?version=<%=version%>" type="text/javascript" charset="utf-8"></script>
+<%-- 引入lyqJS扩展 --%>
+<script src="<%=contextPath%>/jslib/lyqExtDate.js?version=<%=version%>" type="text/javascript" charset="utf-8"></script>
