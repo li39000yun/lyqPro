@@ -255,17 +255,37 @@ $.extend($.fn.validatebox.defaults.rules, {
         },
         message: '两次输入的字符不一至'
     },
-    number: {
-        validator: function (value, param) {
-            return /^\d+$/.test(value);
-        },
-        message: '请输入数字'
-    },
-	integer : {
-		validator : function(value, param) {
-			return /^\d+$/.test(value);
+	number: {
+		validator: function (value, param) {
+			return /^[0-9]+.?[0-9]*$/.test(value);
 		},
-		message : '请输入整数'
+		message: '请输入数字'
+	},
+	money:{
+		validator: function (value, param) {
+			return (/^(([1-9]\d*)|\d)(\.\d{1,2})?$/).test(value);
+		},
+		message:'请输入正确的金额'
+
+	},
+	mone:{
+		validator: function (value, param) {
+			return (/^(([1-9]\d*)|\d)(\.\d{1,2})?$/).test(value);
+		},
+		message:'请输入整数或小数'
+
+	},
+	integer:{
+		validator:function(value,param){
+			return /^[+]?[1-9]\d*$/.test(value);
+		},
+		message: '请输入最小为1的整数'
+	},
+	integ:{
+		validator:function(value,param){
+			return /^[+]?[0-9]\d*$/.test(value);
+		},
+		message: '请输入整数'
 	},
 	range : {
 		validator : function(value, param) {
@@ -276,6 +296,32 @@ $.extend($.fn.validatebox.defaults.rules, {
 			}
 		},
 		message : '输入的数字在{0}到{1}之间'
+	},
+	xiaoshu:{
+		validator : function(value){
+			return /^(([1-9]+)|([0-9]+\.[0-9]{1,2}))$/.test(value);
+		},
+		message : '最多保留两位小数！'
+	},
+	jretailUpperLimit:{
+		validator:function(value,param){
+			if(/^[0-9]+([.]{1}[0-9]{1,2})?$/.test(value)){
+				return parseFloat(value) > parseFloat(param[0]) && parseFloat(value) <= parseFloat(param[1]);
+			}else{
+				return false;
+			}
+		},
+		message:'请输入0到100之间的最多俩位小数的数字'
+	},
+	rateCheck:{
+		validator:function(value,param){
+			if(/^[0-9]+([.]{1}[0-9]{1,2})?$/.test(value)){
+				return parseFloat(value) > parseFloat(param[0]) && parseFloat(value) <= parseFloat(param[1]);
+			}else{
+				return false;
+			}
+		},
+		message:'请输入0到1000之间的最多俩位小数的数字'
 	},
     idcard: {
         validator: function (value, param) {
