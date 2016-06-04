@@ -12,6 +12,9 @@ import sy.service.account.AccountServiceI;
 import sy.util.base.BeanUtils;
 import sy.util.base.HqlFilter;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 /**
  * 账户
  * 
@@ -113,6 +116,9 @@ public class AccountAction extends BaseAction<Account> {
 	public void doNotNeedSecurity_excel_accountTotal() {
 		HqlFilter hqlFilter = new HqlFilter(getRequest());
 		((AccountServiceI) service).exportExcelAccountTotal(hqlFilter, "accountTotal.xls");
+		HttpServletResponse response = getResponse();
+		response.setContentType("application/vnd.ms-excel");
+		response.addHeader("Content-Disposition","attachment;filename=" + "accountTotal.xls");//文件导出的位置及名称
 		// download("accountTotal.xls");
 	}
 }

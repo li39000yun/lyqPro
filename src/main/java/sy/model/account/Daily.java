@@ -20,7 +20,7 @@ import org.apache.commons.lang3.StringUtils;
  * Daily entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "daily", catalog = "ss")
+@Table(name = "daily")
 public class Daily implements java.io.Serializable {
 
 	// Fields

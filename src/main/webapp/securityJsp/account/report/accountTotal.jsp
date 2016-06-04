@@ -60,6 +60,10 @@
 		$('#beginTime').val(lyq.Time.getFirstDayForNow());
 		$('#endTime').val(lyq.Time.getLastDayForNow());
 	}
+
+	function exportExcel() {
+		alert("导出excel啦");
+	}
 </script>
 </head>
 <body class="easyui-layout" data-options="fit:true,border:false">
@@ -84,7 +88,7 @@
 				<td>
 					<table>
 						<tr>
-							<td><a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'ext-icon-table_go',plain:true" onclick="">导出</a></td>
+							<td><a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'ext-icon-table_go',plain:true" onclick="exportExcel()">导出</a></td>
 						</tr>
 					</table>
 				</td>

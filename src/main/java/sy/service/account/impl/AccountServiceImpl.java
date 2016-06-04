@@ -60,6 +60,25 @@ public class AccountServiceImpl extends BaseServiceImpl<Account> implements Acco
 	@Override
 	public void exportExcelAccountTotal(HqlFilter hqlFilter, String excleName) {
 		// TODO Auto-generated method stub
+		List<AccountTotal> accountTotals = accountTotal(hqlFilter);
+		List<List<Object>> datas = new ArrayList<List<Object>>();
+		List<Object> data = new ArrayList<Object>();
+		data.add("序号");
+		data.add("账户名");
+		data.add("收入");
+		data.add("支出");
+		data.add("小计");
+		datas.add(data);
+		int i = 1;
+		for (AccountTotal accountTotal : accountTotals) {
+			data = new ArrayList<Object>();
+			data.add(i++);
+			data.add(accountTotal.getAccountName());
+			data.add(accountTotal.getIncomeTotal());
+			data.add(accountTotal.getPayoutTotal());
+			data.add(accountTotal.getTotal());
+			datas.add(data);
+		}
 
 	}
 
