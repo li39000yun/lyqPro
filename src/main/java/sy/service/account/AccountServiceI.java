@@ -1,5 +1,7 @@
 package sy.service.account;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 
 import sy.model.account.Account;
@@ -32,6 +34,6 @@ public interface AccountServiceI extends BaseServiceI<Account> {
 	 * @param excleName
 	 *            导出excel文件名
 	 */
-	public void exportExcelAccountTotal(HqlFilter hqlFilter, String excleName);
+	public void exportExcelAccountTotal(HqlFilter hqlFilter, String excleName) throws IOException, IllegalAccessException;
 
 }
