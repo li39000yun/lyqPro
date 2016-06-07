@@ -62,7 +62,8 @@
 	}
 
 	function exportExcel() {
-		alert("导出excel啦");
+		$.post(sy.contextPath + '/account/account!doNotNeedSecurity_excel_accountTotal.sy', $("#searchForm").serialize());
+		parent.$.messager.alert('提示','导出excel成功');
 	}
 </script>
 </head>

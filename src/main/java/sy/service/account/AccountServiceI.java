@@ -31,9 +31,9 @@ public interface AccountServiceI extends BaseServiceI<Account> {
 	 * 
 	 * @param hqlFilter
 	 *            hql过滤类
-	 * @param excleName
+	 * @param fileName
 	 *            导出excel文件名
 	 */
-	public void exportExcelAccountTotal(HqlFilter hqlFilter, String excleName) throws IOException, IllegalAccessException;
+	public void exportExcelAccountTotal(HqlFilter hqlFilter, String fileName) throws IOException, IllegalAccessException;
 
 }

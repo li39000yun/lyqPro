@@ -58,7 +58,7 @@ public class AccountServiceImpl extends BaseServiceImpl<Account> implements Acco
     }
 
     @Override
-    public void exportExcelAccountTotal(HqlFilter hqlFilter, String excleName) throws IOException, IllegalAccessException {
+    public void exportExcelAccountTotal(HqlFilter hqlFilter, String fileName) throws IOException, IllegalAccessException {
         // TODO Auto-generated method stub
         List<AccountTotal> accountTotals = accountTotal(hqlFilter);
         ExcelUtil.ExportSetInfo exportSetInfo = new ExcelUtil.ExportSetInfo();
@@ -72,8 +72,10 @@ public class AccountServiceImpl extends BaseServiceImpl<Account> implements Acco
         exportSetInfo.setHeadNames(headNames);
         exportSetInfo.setFieldNames(fieldNames);
         exportSetInfo.setObjsMap(objsMap);
-        exportSetInfo.setOut(new FileOutputStream("C:\\Users\\Administrator\\Desktop\\" + excleName));
+        exportSetInfo.setOut(new FileOutputStream(fileName));
         ExcelUtil.export2Excel(exportSetInfo);
+        exportSetInfo.getOut().flush();
+        exportSetInfo.getOut().close();
     }
 
 }

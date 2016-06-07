@@ -14,6 +14,7 @@ import sy.util.base.HqlFilter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 /**
  * 账户
@@ -113,12 +114,10 @@ public class AccountAction extends BaseAction<Account> {
 	/**
 	 * 导出账户收支统计表
 	 */
-	public void doNotNeedSecurity_excel_accountTotal() {
+	public String doNotNeedSecurity_excel_accountTotal() throws IOException, IllegalAccessException {
 		HqlFilter hqlFilter = new HqlFilter(getRequest());
-		((AccountServiceI) service).exportExcelAccountTotal(hqlFilter, "accountTotal.xls");
-		HttpServletResponse response = getResponse();
-		response.setContentType("application/vnd.ms-excel");
-		response.addHeader("Content-Disposition","attachment;filename=" + "accountTotal.xls");//文件导出的位置及名称
-		// download("accountTotal.xls");
+		String path = getSession().getServletContext().getRealPath("/");
+		((AccountServiceI) service).exportExcelAccountTotal(hqlFilter, path+"fileCache/accountTotal.xls");
+		return null;
 	}
 }
