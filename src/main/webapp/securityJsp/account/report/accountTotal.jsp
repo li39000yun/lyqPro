@@ -62,8 +62,11 @@
 	}
 
 	function exportExcel() {
-		$.post(sy.contextPath + '/account/account!doNotNeedSecurity_excel_accountTotal.sy', $("#searchForm").serialize());
-		parent.$.messager.alert('提示','导出excel成功');
+//		$.post(sy.contextPath + '/account/account!doNotNeedSecurity_excel_accountTotal.sy', $("#searchForm").serialize());
+//		parent.$.messager.alert('提示','导出excel成功');
+		$("#searchForm").attr("action", sy.contextPath + '/account/account!doNotNeedSecurity_excel_accountTotal.sy');
+		$("#searchForm").submit();
+		$("#searchForm").attr("action", sy.contextPath + '/account/account!doNotNeedSecurity_accountTotal.sy');
 	}
 </script>
 </head>
