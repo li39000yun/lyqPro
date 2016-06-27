@@ -165,15 +165,12 @@
         });
         var loginFun = function () {
             var $form = $('#loginForm');//选中form
-            console.info($form);
             if ($form.length == 1 && $form.form('validate')) {
-                $('#loginBtn').linkbutton('disable');
                 $.post(sy.contextPath + '/base/syuser!doNotNeedSessionAndSecurity_login.sy', $form.serialize(), function (result) {
                     if (result.success) {
                         location.replace(sy.contextPath + '/index.jsp');
                     } else {
                         $.messager.alert('提示', result.msg, 'error', function () {
-                            $('#loginBtn').linkbutton('enable');
                         });
                     }
                 }, 'json');
