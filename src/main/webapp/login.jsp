@@ -1,199 +1,215 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%
-	String contextPath = request.getContextPath();
+    String contextPath = request.getContextPath();
 %>
 <!DOCTYPE html>
 <html>
 <head>
-<title>系统登录</title>
-<jsp:include page="inc.jsp"></jsp:include>
-<script type="text/javascript">
-	$(function() {
+    <title>系统登录</title>
+    <jsp:include page="inc.jsp"></jsp:include>
+    <STYLE>
+        body {
+            background: #ebebeb;
+            font-family: "Helvetica Neue", "Hiragino Sans GB", "Microsoft YaHei", "\9ED1\4F53", Arial, sans-serif;
+            color: #222;
+            font-size: 12px;
+        }
 
-		var loginFun = function() {
-			var loginTabs = $('#loginTabs').tabs('getSelected');//当前选中的tab
-			var $form = loginTabs.find('form');//选中的tab里面的form
-			if ($form.length == 1 && $form.form('validate')) {
-				$('#loginBtn').linkbutton('disable');
-				$.post(sy.contextPath + '/base/syuser!doNotNeedSessionAndSecurity_login.sy', $form.serialize(), function(result) {
-					if (result.success) {
-						location.replace(sy.contextPath + '/index.jsp');
-					} else {
-						$.messager.alert('提示', result.msg, 'error', function() {
-							$('#loginBtn').linkbutton('enable');
-						});
-					}
-				}, 'json');
-			}
-		};
+        * {
+            padding: 0px;
+            margin: 0px;
+        }
 
-		$('#loginDialog').show().dialog({
-			modal : false,
-			closable : false,
-			iconCls : 'ext-icon-lock_open',
-			buttons : [ {
-				text : '注册',
-				handler : function() {
-					location.replace(sy.contextPath + '/reg.jsp');
-				}
-			}, {
-				id : 'loginBtn',
-				text : '登录',
-				handler : function() {
-					loginFun();
-				}
-			} ],
-			onOpen : function() {
-				$('form :input:first').focus();
-				$('form :input').keyup(function(event) {
-					if (event.keyCode == 13) {
-						loginFun();
-					}
-				});
-			}
-		});
+        .top_div {
+            background: #008ead;
+            width: 100%;
+            height: 400px;
+        }
 
-		$('#userLoginCombobox').combobox({
-			url : sy.contextPath + '/base/syuser!doNotNeedSessionAndSecurity_loginNameComboBox.sy',
-			valueField : 'loginname',
-			textField : 'loginname',
-			required : true,
-			panelHeight : 'auto',
-			mode : 'remote',
-			delay : 500
-		});
+        .ipt {
+            border: 1px solid #d3d3d3;
+            padding: 10px 10px;
+            width: 290px;
+            border-radius: 4px;
+            padding-left: 35px;
+            -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+            -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+            -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+            transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s
+        }
 
-		$('#userLoginCombogrid').combogrid({
-			url : sy.contextPath + '/base/syuser!doNotNeedSessionAndSecurity_loginNameComboGrid.sy',
-			panelWidth : 500,
-			panelHeight : 200,
-			idField : 'loginname',
-			textField : 'loginname',
-			pagination : true,
-			fitColumns : true,
-			required : true,
-			rownumbers : true,
-			mode : 'remote',
-			delay : 500,
-			sortName : 'loginname',
-			sortOrder : 'asc',
-			pageSize : 5,
-			pageList : [ 5, 10 ],
-			columns : [ [ {
-				field : 'loginname',
-				title : '登录名',
-				width : 100,
-				sortable : true
-			}, {
-				field : 'name',
-				title : '姓名',
-				width : 100,
-				sortable : true
-			}, {
-				field : 'createdatetime',
-				title : '创建时间',
-				width : 150,
-				sortable : true
-			}, {
-				field : 'modifydatetime',
-				title : '最后修改时间',
-				width : 150,
-				sortable : true
-			} ] ]
-		});
+        .ipt:focus {
+            border-color: #66afe9;
+            outline: 0;
+            -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6);
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6)
+        }
 
-	});
-</script>
+        .u_logo {
+            background: url("images/username.png") no-repeat;
+            padding: 10px 10px;
+            position: absolute;
+            top: 43px;
+            left: 40px;
+
+        }
+
+        .p_logo {
+            background: url("images/password.png") no-repeat;
+            padding: 10px 10px;
+            position: absolute;
+            top: 12px;
+            left: 40px;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .tou {
+            background: url("images/tou.png") no-repeat;
+            width: 97px;
+            height: 92px;
+            position: absolute;
+            top: -87px;
+            left: 140px;
+        }
+
+        .left_hand {
+            background: url("images/left_hand.png") no-repeat;
+            width: 32px;
+            height: 37px;
+            position: absolute;
+            top: -38px;
+            left: 150px;
+        }
+
+        .right_hand {
+            background: url("images/right_hand.png") no-repeat;
+            width: 32px;
+            height: 37px;
+            position: absolute;
+            top: -38px;
+            right: -64px;
+        }
+
+        .initial_left_hand {
+            background: url("images/hand.png") no-repeat;
+            width: 30px;
+            height: 20px;
+            position: absolute;
+            top: -12px;
+            left: 100px;
+        }
+
+        .initial_right_hand {
+            background: url("images/hand.png") no-repeat;
+            width: 30px;
+            height: 20px;
+            position: absolute;
+            top: -12px;
+            right: -112px;
+        }
+
+        .left_handing {
+            background: url("images/left-handing.png") no-repeat;
+            width: 30px;
+            height: 20px;
+            position: absolute;
+            top: -24px;
+            left: 139px;
+        }
+
+        .right_handinging {
+            background: url("images/right_handing.png") no-repeat;
+            width: 30px;
+            height: 20px;
+            position: absolute;
+            top: -21px;
+            left: 210px;
+        }
+    </STYLE>
+    <script type="text/javascript">
+        $(function () {
+            //得到焦点
+            $("#password").focus(function () {
+                $("#left_hand").animate({
+                    left: "150",
+                    top: " -38"
+                }, {
+                    step: function () {
+                        if (parseInt($("#left_hand").css("left")) > 140) {
+                            $("#left_hand").attr("class", "left_hand");
+                        }
+                    }
+                }, 2000);
+                $("#right_hand").animate({
+                    right: "-64",
+                    top: "-38px"
+                }, {
+                    step: function () {
+                        if (parseInt($("#right_hand").css("right")) > -70) {
+                            $("#right_hand").attr("class", "right_hand");
+                        }
+                    }
+                }, 2000);
+            });
+            //失去焦点
+            $("#password").blur(function () {
+                $("#left_hand").attr("class", "initial_left_hand");
+                $("#left_hand").attr("style", "left:100px;top:-12px;");
+                $("#right_hand").attr("class", "initial_right_hand");
+                $("#right_hand").attr("style", "right:-112px;top:-12px");
+            });
+        });
+        var loginFun = function () {
+            var $form = $('#loginForm');//选中form
+            console.info($form);
+            if ($form.length == 1 && $form.form('validate')) {
+                $('#loginBtn').linkbutton('disable');
+                $.post(sy.contextPath + '/base/syuser!doNotNeedSessionAndSecurity_login.sy', $form.serialize(), function (result) {
+                    if (result.success) {
+                        location.replace(sy.contextPath + '/index.jsp');
+                    } else {
+                        $.messager.alert('提示', result.msg, 'error', function () {
+                            $('#loginBtn').linkbutton('enable');
+                        });
+                    }
+                }, 'json');
+            }
+        };
+    </script>
 </head>
 <body>
-	<strong>SSHE示例系统默认账户：</strong>
-	<br />
-	<br />
-	<table class="table">
-		<tr>
-			<th>登录名/密码</th>
-			<th>账户描述</th>
-		</tr>
-		<tr>
-			<td>lyq/123456</td>
-			<td>超管，拥有系统所有权限</td>
-		</tr>
-		<tr>
-			<td>guest/123456</td>
-			<td>来宾用户，拥有查看权限</td>
-		</tr>
-		<tr>
-			<td>admin1/123456</td>
-			<td>资源管理员</td>
-		</tr>
-		<tr>
-			<td>admin2/123456</td>
-			<td>角色管理员</td>
-		</tr>
-		<tr>
-			<td>admin3/123456</td>
-			<td>机构管理员</td>
-		</tr>
-		<tr>
-			<td>admin4/123456</td>
-			<td>用户管理员</td>
-		</tr>
-		<tr>
-			<td>admin5/123456</td>
-			<td>系统监控管理员</td>
-		</tr>
-	</table>
-	<br />
-	<strong>如果登录不了，或者数据错乱、丢失等情况，请点击下面链接</strong>
-	<br />
-	<a href="<%=contextPath%>/init.jsp">初始化数据库(<%=contextPath%>/init.jsp)
-	</a>
-
-	<div id="loginDialog" title="系统登录" style="display: none; width: 320px; height: 180px; overflow: hidden;">
-		<div id="loginTabs" class="easyui-tabs" data-options="fit:true,border:false">
-			<div title="用户输入模式" style="overflow: hidden; padding: 10px;">
-				<form method="post" class="form">
-					<table class="table" style="width: 100%; height: 100%;">
-						<tr>
-							<th width="50">登录名</th>
-							<td><input name="data.loginname" class="easyui-validatebox" data-options="required:true" value="lyq" style="width: 210px;" /></td>
-						</tr>
-						<tr>
-							<th>密码</th>
-							<td><input name="data.pwd" type="password" class="easyui-validatebox" data-options="required:true" value="123456" style="width: 210px;" /></td>
-						</tr>
-					</table>
-				</form>
-			</div>
-			<div title="自动补全模式" style="overflow: hidden; padding: 10px;">
-				<form method="post" class="form">
-					<table class="table" style="width: 100%; height: 100%;">
-						<tr>
-							<th width="50">登录名</th>
-							<td><input id="userLoginCombobox" name="data.loginname" type="text" value="lyq" style="width: 214px;"></td>
-						</tr>
-						<tr>
-							<th>密码</th>
-							<td><input name="data.pwd" type="password" class="easyui-validatebox" data-options="required:true" value="123456" style="width: 210px;" /></td>
-						</tr>
-					</table>
-				</form>
-			</div>
-			<div title="数据表格模式" style="overflow: hidden; padding: 10px;">
-				<form method="post" class="form">
-					<table class="table" style="width: 100%; height: 100%;">
-						<tr>
-							<th width="50">登录名</th>
-							<td><input id="userLoginCombogrid" name="data.loginname" type="text" value="lyq" style="width: 214px;"></td>
-						</tr>
-						<tr>
-							<th>密码</th>
-							<td><input name="data.pwd" type="password" class="easyui-validatebox" data-options="required:true" value="123456" style="width: 210px;" /></td>
-						</tr>
-					</table>
-				</form>
-			</div>
-		</div>
-	</div>
+<form id="loginForm" method="post" class="form">
+    <DIV class="top_div"></DIV>
+    <DIV id="loginTabs"
+         style="background: rgb(255, 255, 255); margin: -100px auto auto; border: 1px solid rgb(231, 231, 231); border-image: none; width: 400px; height: 200px; text-align: center;">
+        <DIV style="width: 165px; height: 96px; position: absolute;">
+            <DIV class="tou"></DIV>
+            <DIV class="initial_left_hand" id="left_hand"></DIV>
+            <DIV class="initial_right_hand" id="right_hand"></DIV>
+        </DIV>
+        <P style="padding: 30px 0px 10px; position: relative;"><SPAN
+                class="u_logo"></SPAN> <INPUT class="ipt" name="data.loginname" type="text" placeholder="请输入用户名或邮箱"
+                                              value="lyq">
+        </P>
+        <P style="position: relative;"><SPAN class="p_logo"></SPAN>
+            <INPUT class="ipt" id="password" name="data.pwd" type="password" placeholder="请输入密码" value="123456">
+        </P>
+        <DIV style="height: 50px; line-height: 50px; margin-top: 30px; border-top-color: rgb(231, 231, 231); border-top-width: 1px; border-top-style: solid;">
+            <P style="margin: 0px 35px 20px 45px;"><SPAN style="float: left;"><A
+                    style="color: rgb(204, 204, 204);display: none;"
+                    href="#">忘记密码?</A></SPAN>
+           <SPAN style="float: right;"><A style="color: rgb(204, 204, 204); margin-right: 10px;display: none;"
+                                          href="#">注册</A>
+              <A style="background: rgb(0, 142, 173); padding: 7px 10px; border-radius: 4px; border: 1px solid rgb(26, 117, 152); border-image: none; color: rgb(255, 255, 255); font-weight: bold;"
+                 href="#" onclick="loginFun();">登录</A>
+           </SPAN></P></DIV>
+    </DIV>
+    <div style="text-align:center;">
+    </div>
+</form>
 </body>
 </html>
