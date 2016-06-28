@@ -1,42 +1,28 @@
-package sy.action.account;
+package sy.action.passkeeper;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import sy.action.BaseAction;
-import sy.model.account.Account;
 import sy.model.easyui.Json;
-import sy.service.account.AccountServiceI;
+import sy.model.passkeeper.LyqAccount;
+import sy.service.passkeeper.LyqAccountServiceI;
 import sy.util.base.BeanUtils;
 import sy.util.base.HqlFilter;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-
 /**
- * 账户
- * <p>
- * action访问地址是/account/account.sy
- *
- * @author lyq
+ * 账户信息
+ * action访问地址是/passkeeper/lyqaccount.sy
+ * Created by liyunqaing on 2016/6/28.
  */
-@Namespace("/account")
+@Namespace("/passkeeper")
 @Action
-public class AccountAction extends BaseAction<Account> {
+public class LyqAccountAction extends BaseAction<LyqAccount> {
 
-    /**
-     * 注入业务逻辑，使当前action调用service.xxx的时候，直接是调用基础业务逻辑
-     * <p>
-     * 如果想调用自己特有的服务方法时，请使用((TServiceI) service).methodName()这种形式强转类型调用
-     *
-     * @param service
-     */
     @Autowired
-    public void setService(AccountServiceI service) {
-        this.service = service;
+    public void setService(LyqAccountServiceI service) {
+        super.setService(service);
     }
 
     /**
@@ -47,7 +33,7 @@ public class AccountAction extends BaseAction<Account> {
         if (data != null) {
             HqlFilter hqlFilter = new HqlFilter();
             hqlFilter.addFilter("QUERY_t#name_S_EQ", data.getName());
-            Account account = service.getByFilter(hqlFilter);
+            LyqAccount account = service.getByFilter(hqlFilter);
             if (account != null) {
                 json.setMsg("新建账户失败，账户名已存在！");
             } else {
@@ -69,11 +55,11 @@ public class AccountAction extends BaseAction<Account> {
             HqlFilter hqlFilter = new HqlFilter();
             hqlFilter.addFilter("QUERY_t#id_S_NE", data.getId());
             hqlFilter.addFilter("QUERY_t#name_S_EQ", data.getName());
-            Account account = service.getByFilter(hqlFilter);
+            LyqAccount account = service.getByFilter(hqlFilter);
             if (account != null) {
                 json.setMsg("更新账户失败，账户名已存在！");
             } else {
-                Account t = service.getById(data.getId());
+                LyqAccount t = service.getById(data.getId());
                 BeanUtils.copyNotNullProperties(data, t, new String[]{"createdatetime"});
                 service.update(t);
                 json.setSuccess(true);
@@ -102,21 +88,4 @@ public class AccountAction extends BaseAction<Account> {
         writeJsonByIncludesProperties(service.findByFilter(hqlFilter, 1, 10), new String[]{"name"});
     }
 
-    /**
-     * 账户收支统计表
-     */
-    public void doNotNeedSecurity_accountTotal() {
-        HqlFilter hqlFilter = new HqlFilter(getRequest());
-        writeJson(((AccountServiceI) service).accountTotal(hqlFilter));
-    }
-
-    /**
-     * 导出账户收支统计表
-     */
-    public void doNotNeedSecurity_excel_accountTotal() throws IOException, IllegalAccessException {
-        HqlFilter hqlFilter = new HqlFilter(getRequest());
-        String path = getSession().getServletContext().getRealPath("/");
-        ((AccountServiceI) service).exportExcelAccountTotal(hqlFilter, path + "fileCache/accountTotal.xls");
-        download(path + "fileCache/accountTotal.xls", getResponse());
-    }
 }
