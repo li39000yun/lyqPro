@@ -17,7 +17,7 @@ import static org.junit.Assert.*;
  */
 public class ExcelUtilTest {
 
-    @Test
+   // @Test
     public void export2Excel() throws Exception {
         ExcelUtil.ExportSetInfo exportSetInfo = new ExcelUtil.ExportSetInfo();
         exportSetInfo.setTitles(new String[]{"测试标题"});

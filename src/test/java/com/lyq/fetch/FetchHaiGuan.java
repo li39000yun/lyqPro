@@ -14,7 +14,7 @@ import java.util.List;
  * Created by lyq on 2016/5/9.
  */
 public class FetchHaiGuan {
-    @Test
+   // @Test
     public void fetchKouAn() throws Exception {
         String url = "http://query.customs.gov.cn/MNFTQ/MQuery.aspx";
 

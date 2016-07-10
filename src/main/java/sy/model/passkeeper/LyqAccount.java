@@ -16,7 +16,7 @@ import java.util.UUID;
  * Created by liyunqaing on 2016/6/27.
  */
 @Entity
-@Table(name = "account")
+@Table(name = "lyqaccount")
 @DynamicInsert(true)
 @DynamicUpdate(true)
 public class LyqAccount {

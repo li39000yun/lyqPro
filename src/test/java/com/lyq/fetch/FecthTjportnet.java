@@ -12,7 +12,7 @@ import java.io.IOException;
  */
 public class FecthTjportnet {
 
-    @Test
+    //@Test
     public void fetch() throws IOException {
 //        String loginUrl = "http://wl.tjportnet.com/cas/login?service=http%3A%2F%2Fwl.tjportnet.com%2Fj_spring_cas_security_check%3Bjsessionid%3DgYJQXwyMSKQpsdJZBfBDnHCyLVrqhxCvRndnjchkvfL4rh05TBpp%21-1704326175%211462774041278";
         String loginUrl = "http://wl.tjportnet.com";
