@@ -49,17 +49,17 @@
 				if (result.id != undefined) {
 					$('form').form('load', {
 						'data.id' : result.id,
+						'data.applyname' : result.applyname,
 						'data.name' : result.name,
 						'data.type' : result.type,
-						'data.money' : result.money,
+						'data.owner' : result.owner,
+						'data.password' : result.password,
 						'data.remark' : result.remark
 					});
 				}
 				parent.$.messager.progress('close');
 			}, 'json');
-			// 金额不可改
-			$('#money').css({background: "#A1A1A1" }).attr("readonly","readonly");
-			// 账户名不可改
+			// 用户名不可改
 			$('#name').css({background: "#A1A1A1" }).attr("readonly","readonly");
 		}
 	});
@@ -75,23 +75,20 @@
 					<td><input name="data.id" style="background-color:#A1A1A1" value="<%=id%>" readonly="readonly" /></td>
 				</tr>
 				<tr>
-					<th>账户名</th>
+					<th>应用名称</th>
+					<td><input id="applyname" name="data.applyname" class="easyui-validatebox" data-options="required:true"/></td>
+				</tr>
+				<tr>
+					<th>用户名</th>
 					<td><input id="name" name="data.name" class="easyui-validatebox" data-options="required:true"/></td>
 				</tr>
 				<tr>
-					<th>类型</th>
-					<td>
-						<select id="type" class="easyui-combobox" name="data.type" data-options="panelHeight:'auto',editable:false" style="width: 155px;">
-							<option value="0">现金</option>
-							<option value="1">银行卡</option>
-							<option value="2">虚拟账户</option>
-							<option value="3">信用卡</option>
-						</select>
-					</td>
+					<th>密码</th>
+					<td><input name="data.password" data-options="required:true"/></td>
 				</tr>
 				<tr>
-					<th>余额</th>
-					<td><input id="money" name="data.money" class="easyui-validatebox" data-options="required:true,validType:'number'"/></td>
+					<th>所属人</th>
+					<td><input id="owner" name="data.owner" class="easyui-validatebox"/></td>
 				</tr>
 				<tr>
 					<th>备注</th>

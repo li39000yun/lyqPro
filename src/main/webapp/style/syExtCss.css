@@ -53,5 +53,6 @@ fieldset {
 
 legend {
 	border: 1px dotted #D1D7DC;
-	font-size: small;
+	/*font-size: small;小*/
+	font-size: medium;
 }

@@ -24,11 +24,12 @@ public class LyqAccount {
 
     private String id;
     private String name;// 账户名
-    private Double money;// 余额
     private String password;// 密码
     private Date createdatetime;// 创建时间
     private String remark;// 备注
     private int actflag;// 状态(0:禁用;1:启用;)
+    private String owner;// 所有者
+    private String applyname;// 应用名称
 
     // Property accessors
     @Id
@@ -62,15 +63,6 @@ public class LyqAccount {
         this.password = password;
     }
 
-    @Column(name = "money", precision = 10)
-    public Double getMoney() {
-        return this.money;
-    }
-
-    public void setMoney(Double money) {
-        this.money = money;
-    }
-
     @Column(name = "createdatetime", length = 0)
     public Date getCreatedatetime() {
         if (this.createdatetime != null)
@@ -100,4 +92,22 @@ public class LyqAccount {
         this.actflag = actflag;
     }
 
+    @Column(name = "owner")
+    public String getOwner() {
+        return owner;
+    }
+
+    public void setOwner(String owner) {
+        this.owner = owner;
+    }
+
+    @Column(name = "applyname")
+    public String getApplyname() {
+        return applyname;
+    }
+
+    public void setApplyname(String applyname) {
+        this.applyname = applyname;
+
+    }
 }

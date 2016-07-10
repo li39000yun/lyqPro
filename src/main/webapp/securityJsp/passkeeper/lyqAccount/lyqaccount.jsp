@@ -66,32 +66,25 @@
 			pageSize : 50,
 			pageList : [ 10, 20, 30, 40, 50, 100, 200, 300, 400, 500 ],
 			frozenColumns : [ [ {
+				width : '100',
+				title : '应用名称',
+				field : 'applyname',
+				sortable : true
+			}, {
 				width : '80',
-				title : '账户名',
+				title : '用户名',
 				field : 'name',
 				sortable : true
 			}, {
 				width : '80',
-				title : '余额',
-				field : 'money',
+				title : '密码',
+				field : 'password',
 				sortable : true
 			}, {
 				width : '80',
-				title : '类型',
-				field : 'type',
-				sortable : true,
-				formatter : function(value, row, index) {
-					switch (value) {
-					case 0:
-						return '现金';
-					case 1:
-						return '银行卡';
-					case 2:
-						return '虚拟账户';
-					case 3:
-						return '信用卡';
-					}
-				}
+				title : '所属人',
+				field : 'owner',
+				sortable : true
 			}] ],
 			columns : [ [ {
 				width : '150',
@@ -110,13 +103,13 @@
 				formatter : function(value, row) {
 					var str = '';
 					<%if (securityUtil.havePermission("/passkeeper/lyqaccount!getById")) {%>
-						str += sy.formatString('<img class="iconImg ext-icon-note" title="查看" onclick="showFun(\'{0}\');"/>', row.id);
+						str += sy.formatString('<a href="javascript:void(0);" class="easyui-linkbutton" onclick="showFun(\'{0}\');">查看</a>', row.id);
 					<%}%>
 					<%if (securityUtil.havePermission("/passkeeper/lyqaccount!update")) {%>
-						str += sy.formatString('<img class="iconImg ext-icon-note_edit" title="编辑" onclick="editFun(\'{0}\');"/>', row.id);
+						str += sy.formatString('<a href="javascript:void(0);" class="easyui-linkbutton" onclick="editFun(\'{0}\');">编辑</a>', row.id);
 					<%}%>
 					<%if (securityUtil.havePermission("/passkeeper/lyqaccount!delete")) {%>
-						str += sy.formatString('<img class="iconImg ext-icon-note_delete" title="删除" onclick="removeFun(\'{0}\');"/>', row.id);
+						str += sy.formatString('<a href="javascript:void(0);" class="easyui-linkbutton" onclick="removeFun(\'{0}\');">删除</a>', row.id);
 					<%}%>
 					return str;
 				}
@@ -143,7 +136,7 @@
 					<form id="searchForm">
 						<table>
 							<tr>
-								<td>账户名</td>
+								<td>用户名</td>
 								<td><input name="QUERY_t#name_S_LK" style="width: 80px;" /></td>
 								<td>创建时间</td>
 								<td><input name="QUERY_t#createdatetime_D_GE" class="Wdate" onclick="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly="readonly" style="width: 120px;" />-<input name="QUERY_t#createdatetime_D_LE" class="Wdate" onclick="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly="readonly" style="width: 120px;" /></td>
