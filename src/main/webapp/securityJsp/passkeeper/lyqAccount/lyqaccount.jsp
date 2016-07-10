@@ -8,13 +8,13 @@
 <html>
 <head>
 <title></title>
-<jsp:include page="../../inc.jsp"></jsp:include>
+<jsp:include page="/inc.jsp"></jsp:include>
 <script type="text/javascript">
 	var grid;
 	var addFun = function() {
 		var dialog = parent.sy.modalDialog({
 			title : '添加账户信息',
-			url : sy.contextPath + '/securityJsp/account/lyqaccountForm.jsp',
+			url : sy.contextPath + '/securityJsp/passkeeper/lyqAccount/lyqaccountForm.jsp',
 			buttons : [ {
 				text : '添加',
 				handler : function() {
@@ -26,13 +26,13 @@
 	var showFun = function(id) {
 		var dialog = parent.sy.modalDialog({
 			title : '查看账户信息',
-			url : sy.contextPath + '/securityJsp/account/lyqaccountForm.jsp?id=' + id
+			url : sy.contextPath + '/securityJsp/passkeeper/lyqAccount/lyqaccountForm.jsp?id=' + id
 		});
 	};
 	var editFun = function(id) {
 		var dialog = parent.sy.modalDialog({
 			title : '编辑账户信息',
-			url : sy.contextPath + '/securityJsp/account/lyqaccountForm.jsp?id=' + id,
+			url : sy.contextPath + '/securityJsp/passkeeper/lyqAccount/lyqaccountForm.jsp?id=' + id,
 			buttons : [ {
 				text : '编辑',
 				handler : function() {
@@ -44,7 +44,7 @@
 	var removeFun = function(id) {
 		parent.$.messager.confirm('询问', '您确定要删除此记录？', function(r) {
 			if (r) {
-				$.post(sy.contextPath + '/account/account!delete.sy', {
+				$.post(sy.contextPath + '/passkeeper/lyqaccount!delete.sy', {
 					id : id
 				}, function() {
 					grid.datagrid('reload');
@@ -55,7 +55,7 @@
 	$(function() {
 		grid = $('#grid').datagrid({
 			title : '',
-			url : sy.contextPath + '/account/account!grid.sy',
+			url : sy.contextPath + '/passkeeper/lyqaccount!grid.sy',
 			striped : true,
 			rownumbers : true,
 			pagination : true,
@@ -109,13 +109,13 @@
 				width : '90',
 				formatter : function(value, row) {
 					var str = '';
-					<%if (securityUtil.havePermission("/account/account!getById")) {%>
+					<%if (securityUtil.havePermission("/passkeeper/lyqaccount!getById")) {%>
 						str += sy.formatString('<img class="iconImg ext-icon-note" title="查看" onclick="showFun(\'{0}\');"/>', row.id);
 					<%}%>
-					<%if (securityUtil.havePermission("/account/account!update")) {%>
+					<%if (securityUtil.havePermission("/passkeeper/lyqaccount!update")) {%>
 						str += sy.formatString('<img class="iconImg ext-icon-note_edit" title="编辑" onclick="editFun(\'{0}\');"/>', row.id);
 					<%}%>
-					<%if (securityUtil.havePermission("/account/account!delete")) {%>
+					<%if (securityUtil.havePermission("/passkeeper/lyqaccount!delete")) {%>
 						str += sy.formatString('<img class="iconImg ext-icon-note_delete" title="删除" onclick="removeFun(\'{0}\');"/>', row.id);
 					<%}%>
 					return str;
@@ -157,7 +157,7 @@
 				<td>
 					<table>
 						<tr>
-							<%if (securityUtil.havePermission("/account/account!save")) {%>
+							<%if (securityUtil.havePermission("/passkeeper/lyqaccount!save")) {%>
 							<td><a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'ext-icon-note_add',plain:true" onclick="addFun();">添加</a></td>
 							<%}%>
 						</tr>

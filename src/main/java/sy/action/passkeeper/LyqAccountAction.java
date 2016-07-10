@@ -18,7 +18,7 @@ import sy.util.base.HqlFilter;
  */
 @Namespace("/passkeeper")
 @Action
-public class LyqAccountAction extends BaseAction<LyqAccount> {
+public class LyqaccountAction extends BaseAction<LyqAccount> {
 
     @Autowired
     public void setService(LyqAccountServiceI service) {

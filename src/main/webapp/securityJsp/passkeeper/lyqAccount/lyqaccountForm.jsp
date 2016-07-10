@@ -12,14 +12,14 @@
 <html>
 <head>
 <title></title>
-<jsp:include page="../../inc.jsp"></jsp:include>
+<jsp:include page="/inc.jsp"></jsp:include>
 <script type="text/javascript">
 	var submitNow = function($dialog, $grid, $pjq) {
 		var url;
 		if ($(':input[name="data.id"]').val().length > 0) {
-			url = sy.contextPath + '/account/account!update.sy';
+			url = sy.contextPath + '/passkeeper/lyqaccount!update.sy';
 		} else {
-			url = sy.contextPath + '/account/account!save.sy';
+			url = sy.contextPath + '/passkeeper/lyqaccount!save.sy';
 		}
 		$.post(url, sy.serializeObject($('form')), function(result) {
 			parent.sy.progressBar('close');//关闭上传进度条
@@ -43,7 +43,7 @@
 			parent.$.messager.progress({
 				text : '数据加载中....'
 			});
-			$.post(sy.contextPath + '/account/account!getById.sy', {
+			$.post(sy.contextPath + '/passkeeper/lyqaccount!getById.sy', {
 				id : $(':input[name="data.id"]').val()
 			}, function(result) {
 				if (result.id != undefined) {
