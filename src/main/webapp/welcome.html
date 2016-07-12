@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>欢迎页面</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script type="text/javascript"
+            src="/lyqPro/src/main/webapp/jslib/My97DatePicker4.8Beta3/My97DatePicker/WdatePicker.js"
+            charset="utf-8"></script>
+    <script src="/lyqPro/src/main/webapp/jslib/ueditor1_2_6_1-utf8-jsp/ueditor.config.js" type="text/javascript"
+            charset="utf-8"></script>
+    <script src="/lyqPro/src/main/webapp/jslib/ueditor1_2_6_1-utf8-jsp/ueditor.all.min.js" type="text/javascript"
+            charset="utf-8"></script>
+    <script src='/lyqPro/src/main/webapp//jslib/jquery-2.0.3.js' type='text/javascript' charset='utf-8'></script>
+    <script src="/lyqPro/src/main/webapp/jslib/syExtJquery.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/lyqPro/src/main/webapp/jslib/Highcharts-3.0.6/js/highcharts.js" type="text/javascript"
+            charset="utf-8"></script>
+    <script src="/lyqPro/src/main/webapp/jslib/Highcharts-3.0.6/js/modules/exporting.js" type="text/javascript"
+            charset="utf-8"></script>
+    <script src="/lyqPro/src/main/webapp/jslib/syExtHighcharts.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript" src="/lyqPro/src/main/webapp/jslib/plupload-2.0.0/js/plupload.full.min.js"></script>
+    <script type="text/javascript" src="/lyqPro/src/main/webapp/jslib/plupload-2.0.0/js/i18n/zh_CN.js"></script>
+    <link id="easyuiTheme" rel="stylesheet"
+          href="/lyqPro/src/main/webapp/jslib/jquery-easyui-1.3.4/themes/default/easyui.css" type="text/css">
+    <!-- <link rel="stylesheet" href="/lyqPro/src/main/webapp//jslib/jquery-easyui-1.3.4/themes/icon.css" type="text/css"> -->
+    <script type="text/javascript" src="/lyqPro/src/main/webapp/jslib/jquery-easyui-1.3.4/jquery.easyui.min.js"
+            charset="utf-8"></script>
+    <script type="text/javascript" src="/lyqPro/src/main/webapp/jslib/jquery-easyui-1.3.4/locale/easyui-lang-zh_CN.js"
+            charset="utf-8"></script>
+    <link rel="stylesheet" href="/lyqPro/src/main/webapp/jslib/jquery-easyui-portal/portal.css" type="text/css">
+    <script type="text/javascript" src="/lyqPro/src/main/webapp/jslib/jquery-easyui-portal/jquery.portal.js"
+            charset="utf-8"></script>
+    <script src="/lyqPro/src/main/webapp/jslib/syExtEasyUI.js" type="text/javascript" charset="utf-8"></script>
+    <link rel="stylesheet" href="/lyqPro/src/main/webapp//style/syExtIcon.css" type="text/css">
+    <link rel="stylesheet" href="/lyqPro/src/main/webapp//style/syExtCss.css" type="text/css">
+    <script src="/lyqPro/src/main/webapp/jslib/syExtJavascript.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/lyqPro/src/main/webapp/jslib/lyqExtDate.js" type="text/javascript" charset="utf-8"></script>
+
+
+    <script type="text/javascript">
+        $(function () {
+            console.info("a");
+            $('#p2').panel({
+                width: 500,
+                height: 150,
+                title: 'My Panel',
+                fit: true,
+                tools: [{
+                    iconCls: 'icon-add',
+                    handler: function () {
+                        alert('new')
+                    }
+                }, {
+                    iconCls: 'icon-save',
+                    handler: function () {
+                        alert('save')
+                    }
+                }]
+            });
+            console.info("b");
+        })
+    </script>
+</head>
+<body style="background:#fafafa;">
+<div>
+    <div style="padding:10px;">
+        <div id="p" class="easyui-panel" title="我的备忘录"
+             style="width:100%;height:150px;padding:10px;background:#fafafa;"
+             data-options="iconCls:'icon-save',closable:true,
+                collapsible:true,minimizable:true,maximizable:true,fit:true">
+            <p>备忘录1</p>
+            <p>备忘录2.</p>
+        </div>
+    </div>
+    <div style="padding:10px;">
+        <div style="width:50%;height:200px;float:left;">
+            <div id="p2" style="padding:10px;">
+                <p>panel content.</p>
+                <p>panel content.</p>
+            </div>
+        </div>
+        <div style="width:50%;height:200px;float: left;">
+            <div id="p3" class="easyui-panel" title="我的备忘录"
+                 style="width:500px;height:150px;padding:10px;background:#fafafa;"
+                 data-options="iconCls:'icon-save',fit:true">
+                <p>备忘录1</p>
+                <p>备忘录2.</p>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

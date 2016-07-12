@@ -3,5 +3,5 @@
 	String contextPath = request.getContextPath();
 %>
 <div class="panel-header panel-title" style="text-align: center;">
-	练习程序
+	lyqpro v1.0
 </div>
