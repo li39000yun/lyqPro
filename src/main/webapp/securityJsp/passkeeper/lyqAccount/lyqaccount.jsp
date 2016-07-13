@@ -13,7 +13,7 @@
 	var grid;
 	var addFun = function() {
 		var dialog = parent.sy.modalDialog({
-			title : '添加账户信息',
+			title : '添加账号信息',
 			url : sy.contextPath + '/securityJsp/passkeeper/lyqAccount/lyqaccountForm.jsp',
 			buttons : [ {
 				text : '添加',
@@ -25,13 +25,13 @@
 	};
 	var showFun = function(id) {
 		var dialog = parent.sy.modalDialog({
-			title : '查看账户信息',
+			title : '查看账号信息',
 			url : sy.contextPath + '/securityJsp/passkeeper/lyqAccount/lyqaccountForm.jsp?id=' + id
 		});
 	};
 	var editFun = function(id) {
 		var dialog = parent.sy.modalDialog({
-			title : '编辑账户信息',
+			title : '编辑账号信息',
 			url : sy.contextPath + '/securityJsp/passkeeper/lyqAccount/lyqaccountForm.jsp?id=' + id,
 			buttons : [ {
 				text : '编辑',
@@ -71,7 +71,7 @@
 				field : 'applyname',
 				sortable : true
 			}, {
-				width : '80',
+				width : '150',
 				title : '用户名',
 				field : 'name',
 				sortable : true
@@ -103,13 +103,13 @@
 				formatter : function(value, row) {
 					var str = '';
 					<%if (securityUtil.havePermission("/passkeeper/lyqaccount!getById")) {%>
-						str += sy.formatString('<a href="javascript:void(0);" class="easyui-linkbutton" onclick="showFun(\'{0}\');">查看</a>', row.id);
+						str += sy.formatString('<img class="iconImg ext-icon-note" title="查看" onclick="showFun(\'{0}\');"/>', row.id);
 					<%}%>
 					<%if (securityUtil.havePermission("/passkeeper/lyqaccount!update")) {%>
-						str += sy.formatString('<a href="javascript:void(0);" class="easyui-linkbutton" onclick="editFun(\'{0}\');">编辑</a>', row.id);
+						str += sy.formatString('<img class="iconImg ext-icon-note_edit" title="编辑" onclick="editFun(\'{0}\');"/>', row.id);
 					<%}%>
 					<%if (securityUtil.havePermission("/passkeeper/lyqaccount!delete")) {%>
-						str += sy.formatString('<a href="javascript:void(0);" class="easyui-linkbutton" onclick="removeFun(\'{0}\');">删除</a>', row.id);
+						str += sy.formatString('<img class="iconImg ext-icon-note_delete" title="删除" onclick="removeFun(\'{0}\');"/>', row.id);
 					<%}%>
 					return str;
 				}

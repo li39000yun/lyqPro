@@ -89,5 +89,40 @@
         </div>
     </div>
 </div>
+
+<form method="post" class="form">
+    <fieldset>
+        <legend>账户基本信息</legend>
+        <table class="table" style="width: 100%;">
+            <tr>
+                <th>编号</th>
+                <td><input name="data.id" style="background-color:#A1A1A1" value="<%=id%>" readonly="readonly" /></td>
+            </tr>
+            <tr>
+                <th>账户名</th>
+                <td><input id="name" name="data.name" class="easyui-validatebox" data-options="required:true"/></td>
+            </tr>
+            <tr>
+                <th>类型</th>
+                <td>
+                    <select id="type" class="easyui-combobox" name="data.type" data-options="panelHeight:'auto',editable:false" style="width: 155px;">
+                        <option value="0">现金</option>
+                        <option value="1">银行卡</option>
+                        <option value="2">虚拟账户</option>
+                        <option value="3">信用卡</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th>余额</th>
+                <td><input id="money" name="data.money" class="easyui-validatebox" data-options="required:true,validType:'number'"/></td>
+            </tr>
+            <tr>
+                <th>备注</th>
+                <td><input name="data.remark" /></td>
+            </tr>
+        </table>
+    </fieldset>
+</form>
 </body>
 </html>

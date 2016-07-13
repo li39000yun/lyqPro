@@ -59,8 +59,6 @@
 				}
 				parent.$.messager.progress('close');
 			}, 'json');
-			// 用户名不可改
-			$('#name').css({background: "#A1A1A1" }).attr("readonly","readonly");
 		}
 	});
 </script>

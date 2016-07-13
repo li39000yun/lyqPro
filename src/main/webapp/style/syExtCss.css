@@ -37,6 +37,7 @@
 .form th,.form td {
 	padding: 0.1em 0.3em;
 	border: 1px solid #D1D7DC;
+	font-size: 12px;
 }
 
 .form input,.form select,.form textarea {
