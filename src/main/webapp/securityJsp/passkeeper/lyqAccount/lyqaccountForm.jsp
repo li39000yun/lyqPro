@@ -7,6 +7,10 @@
 	if (id == null) {
 		id = "";
 	}
+	String isCopy = request.getParameter("isCopy");
+	if (isCopy == null) {
+		isCopy = "";
+	}
 %>
 <!DOCTYPE html>
 <html>
@@ -57,6 +61,9 @@
 						'data.remark' : result.remark
 					});
 				}
+				if ($('#isCopy').val()==1) {// 是复制过来的，清空id
+					$(':input[name="data.id"]').val("");
+				}
 				parent.$.messager.progress('close');
 			}, 'json');
 		}
@@ -64,6 +71,7 @@
 </script>
 </head>
 <body>
+<input type="hidden" id="isCopy" value="<%=isCopy%>"/>
 	<form method="post" class="form">
 		<fieldset>
 			<legend>账户基本信息</legend>

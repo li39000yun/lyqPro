@@ -11,6 +11,8 @@ import sy.service.passkeeper.LyqAccountServiceI;
 import sy.util.base.BeanUtils;
 import sy.util.base.HqlFilter;
 
+import java.io.File;
+
 /**
  * 账号信息
  * action访问地址是/passkeeper/lyqaccount.sy
@@ -19,6 +21,8 @@ import sy.util.base.HqlFilter;
 @Namespace("/passkeeper")
 @Action
 public class LyqaccountAction extends BaseAction<LyqAccount> {
+
+    public File importFile;
 
     @Autowired
     public void setService(LyqAccountServiceI service) {
@@ -44,4 +48,23 @@ public class LyqaccountAction extends BaseAction<LyqAccount> {
         writeJsonByIncludesProperties(service.findByFilter(hqlFilter, 1, 10), new String[]{"name"});
     }
 
+    /**
+     * 通过excel导入数据
+     */
+    public void importExcel() {
+        Json json = new Json();
+        if (importFile != null) {
+            json.setSuccess(true);
+            json.setMsg("成功！");
+        }
+        writeJson(json);
+    }
+
+    public File getImportFile() {
+        return importFile;
+    }
+
+    public void setImportFile(File importFile) {
+        this.importFile = importFile;
+    }
 }

@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>MyTest</title>
+<title>LyqPro</title>
 <jsp:include page="../inc.jsp"></jsp:include>
 <script type="text/javascript">
 	var mainMenu;

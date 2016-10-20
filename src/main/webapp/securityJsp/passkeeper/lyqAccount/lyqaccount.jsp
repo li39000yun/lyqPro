@@ -38,6 +38,14 @@
 				handler : function() {
 					dialog.find('iframe').get(0).contentWindow.submitForm(dialog, grid, parent.$);
 				}
+			},{
+				text : '复制',
+				handler : function() {
+					// 关闭当前窗口
+					dialog.window('close');
+					// 打开新增窗口
+					copyFun(id);// 复制
+				}
 			} ]
 		});
 	};
@@ -50,6 +58,38 @@
 					grid.datagrid('reload');
 				}, 'json');
 			}
+		});
+	};
+	/**
+	 * 复制方法，打开复制窗口
+	 * @param id 主键
+     */
+	var copyFun = function(id) {
+		var dialog = parent.sy.modalDialog({
+			title : '添加账号信息',
+			url : sy.contextPath + '/securityJsp/passkeeper/lyqAccount/lyqaccountForm.jsp?id='+id+"&isCopy=1",
+			buttons : [ {
+				text : '添加',
+				handler : function() {
+					dialog.find('iframe').get(0).contentWindow.submitForm(dialog, grid, parent.$);
+				}
+			} ]
+		});
+	};
+
+	/**
+	 * excel导入
+     */
+	var importFun = function() {
+		var dialog = parent.sy.modalDialog({
+			title : 'Excel导入',
+			url : sy.contextPath + '/securityJsp/passkeeper/lyqAccount/lyqaccountImport.jsp',
+			buttons : [ {
+				text : '添加',
+				handler : function() {
+					dialog.find('iframe').get(0).contentWindow.submitForm(dialog, grid, parent.$);
+				}
+			} ]
 		});
 	};
 	$(function() {
@@ -153,6 +193,7 @@
 							<%if (securityUtil.havePermission("/passkeeper/lyqaccount!save")) {%>
 							<td><a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'ext-icon-note_add',plain:true" onclick="addFun();">添加</a></td>
 							<%}%>
+							<td><a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'ext-icon-table_add',plain:true" onclick="importFun();">导入</a></td>
 						</tr>
 					</table>
 				</td>
