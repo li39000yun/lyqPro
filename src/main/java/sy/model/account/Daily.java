@@ -25,12 +25,12 @@ public class Daily implements java.io.Serializable {
 
 	// Fields
 
-	private String id;
-	private Double money;
-	private Timestamp createdatetime;
-	private String remark;
-	private Short type;
-	private Short actflag;
+	private String id;// 流水号
+	private Double money;// 金额
+	private Timestamp createdatetime;// 创建时间
+	private String remark;// 备注
+	private Short type;// 类型(0:收入;1:支出;)
+	private Short actflag;// 状态(0:禁用;1:启用)
 	
 	private Account account;// 关联日记账账户对象
 

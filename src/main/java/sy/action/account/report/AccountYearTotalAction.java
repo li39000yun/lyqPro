@@ -5,6 +5,7 @@ import org.apache.struts2.convention.annotation.Namespace;
 import org.springframework.beans.factory.annotation.Autowired;
 import sy.action.BaseAction;
 import sy.model.account.Account;
+import sy.model.account.vo.AccountYearTotal;
 import sy.service.account.report.AccountYearTotalServiceI;
 import sy.util.base.HqlFilter;
 
@@ -16,8 +17,8 @@ import sy.util.base.HqlFilter;
  * @author lyq
  */
 @Namespace("/account")
-@Action
-public class AccountYearTotalAction extends BaseAction<Account> {
+@Action("accountYearTotal")
+public class AccountYearTotalAction extends BaseAction<AccountYearTotal> {
 
     /**
      * 注入业务逻辑，使当前action调用service.xxx的时候，直接是调用基础业务逻辑

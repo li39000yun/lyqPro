@@ -15,7 +15,8 @@
 		initSearch();// 初始查询
 		grid = $('#grid').datagrid({
 			title : '',
-			url : sy.contextPath + '/securityJsp/account/report/yearTotal.json',
+//			url : sy.contextPath + '/securityJsp/account/report/yearTotal.json',
+			url : sy.contextPath + '/account/accountYearTotal!doNotNeedSecurity_accountYearTotal.sy',
 			striped : true,
 			singleSelect : true,
 			rownumbers : true,
